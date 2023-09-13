@@ -5,10 +5,10 @@
 import pymysql.cursors
 
 # Connect to the database
-connection = pymysql.connect(host='192.168.2.116',
-                             user='nextc',
-                             password='nextc',
-                             database='nextc',
+connection = pymysql.connect(host='',
+                             user='',
+                             password='',
+                             database='',
                              cursorclass=pymysql.cursors.DictCursor)
 
 cursor = connection.cursor()
