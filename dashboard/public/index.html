@@ -4,8 +4,10 @@
     <title>坐姿偵測儀錶板</title>
   </head>
   <body>
+
+
     <div>
-      <canvas id="myChart"></canvas>
+      <canvas id="myChart", width="1000", height="100"></canvas>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -14,24 +16,104 @@
       const ctx = document.getElementById('myChart');
 
       new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
           labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
           datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1
+            label: '數據1',
+            data: [0, 1, 2, 3, 4, 5],
+            borderWidth: 3
           }]
         },
         options: {
           scales: {
             y: {
-              beginAtZero: true
+              beginAtZero: false
             }
           }
         }
       });
     </script>
-    <div id="root"></div>
+
+    <div>
+      <canvas id="hell", width="1000", height="100"></canvas>
+    </div>
+
+    <script>
+        const HI = document.getElementById('hell')
+
+        new Chart(HI, {
+        type: 'line',
+        data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+            label: '數據2',
+            data: [0, 1, 2, 3, 4, 4],
+            borderWidth: 3
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: false
+            }
+          }
+        }
+      });
+    </script>
+
+<div>
+  <canvas id="YEE", width="1000", height="100"></canvas>
+</div>
+
+<script>
+    const OO = document.getElementById('YEE')
+
+    new Chart(OO, {
+    type: 'line',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '數據3',
+        data: [0, 1, 2, 3, 4, 4],
+        borderWidth: 3
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: false
+        }
+      }
+    }
+  });
+</script>
+
+<div>
+  <canvas id="v", width="1000", height="100"></canvas>
+</div>
+
+<script>
+    const d = document.getElementById('v')
+
+    new Chart(d, {
+    type: 'line',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '數據4',
+        data: [0, 1, 2, 3, 4, 4],
+        borderWidth: 3
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: false
+        }
+      }
+    }
+  });
+</script>
   </body>
 </html>
