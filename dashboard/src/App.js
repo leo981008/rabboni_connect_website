@@ -3,7 +3,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>
-          Hello World!!
+          This is a testing of react component. Design your own component here if u need!
         </p>
       </header>
     </div>
