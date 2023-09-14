@@ -5,14 +5,14 @@
 import pymysql.cursors
 
 # Connect to the database
-connection = pymysql.connect(host='',
-                             user='',
-                             password='',
-                             database='',
+connection = pymysql.connect(host='127.0.0.1',
+                             user='situser',
+                             password='sit',
+                             database='sitdb',
                              cursorclass=pymysql.cursors.DictCursor)
 
 cursor = connection.cursor()
 # query = "select '*' from nextctable"
-query = "insert nextctable1 value(0,-100)"
+query = "insert point value(0,-100)"
 cursor.execute(query)
 connection.commit()
