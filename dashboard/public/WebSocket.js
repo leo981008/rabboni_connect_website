@@ -1,8 +1,8 @@
 var ws = new WebSocket('');
   function shortPolling() {
     ws.addEventListener('message', function(e) {
-      var msg = JSON.parse(e.data);
-      value = [(Number(msg))]
+      var data = JSON.parse(e.data);
+      value = [(Number(data))]
     })
   }
   setInterval(shortPolling, 1000);
