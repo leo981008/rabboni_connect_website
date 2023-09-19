@@ -13,6 +13,9 @@ connection = pymysql.connect(host='127.0.0.1',
 
 cursor = connection.cursor()
 # query = "select '*' from nextctable"
-query = "insert point value(0,-100)"
+query = "insert pointdb value(0,111,222,333,444,555)"
 cursor.execute(query)
+query1 = "SELECT * FROM pointdb;"
+cursor.execute(query1)
+print(cursor.fetchall())
 connection.commit()
