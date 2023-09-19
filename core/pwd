@@ -1,4 +1,4 @@
 database == sitdb
 user == situser
 pwd == sit
-table == point
+table == pointdb
