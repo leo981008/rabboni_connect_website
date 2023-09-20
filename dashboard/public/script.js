@@ -1,8 +1,25 @@
 Chart.defaults.backgroundColor = 'rgb(128, 138, 135)';
-stored = [0, 0, 0, 0, 0]
+stored = [[0, 0, 0, 0, 0]
+          [0, 0, 0, 0, 0]]
+x = 0
+function shortPolling() {
+var ws = new WebSocket('ws://localhost:8080');
+   ws.addEventListener('message', function(e) {
+     var data = JSON.parse(e.data);
+     value1 = Number(data.angle1)
+     if (x < 5) {
+       stored[x] = value
+       x++
+     }
+      else {
+       stored.push(value)
+       stored.shift()
+     }
+
+     
+   })
 
 const chart1 = document.getElementById('chart1');
-
       new Chart(chart1, {
         type: 'line',
         data: {
@@ -22,6 +39,7 @@ const chart1 = document.getElementById('chart1');
           }
         }
       });
+      
 
 const chart2 = document.getElementById('chart2')
 
@@ -110,17 +128,5 @@ const chart2 = document.getElementById('chart2')
       }
     }
   });
-
-
-  var ws = new WebSocket('ws://localhost:8080');
-  function shortPolling() {
-    ws.addEventListener('message', function(e) {
-      var data = JSON.parse(e.data);
-      value = (Number(data))
-      for (var i = 0; i < 5; i++) {
-        
-      }
-      stored.push(value)
-    })
-  }
-  setInterval(shortPolling, 1000);
+}
+setInterval(shortPolling, 1000);
