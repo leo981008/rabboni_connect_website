@@ -1,6 +1,6 @@
-sudo mysql -u situser -p
-pw=sit
-use sitdb;
+sudo mysql -u situser -p  
+pw=sit  
+use sitdb;  
 create table pointdb(
    id INT NOT NULL AUTO_INCREMENT,
    p1 INT(100) NOT NULL,
