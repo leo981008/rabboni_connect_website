@@ -8,5 +8,6 @@ create table pointdb(
    p3 INT(100) NOT NULL,  
    p4 INT(100) NOT NULL,  
    p5 INT(100) NOT NULL,  
+   time INT(100) NOT NULL,  
    PRIMARY KEY ( id )  
 );
