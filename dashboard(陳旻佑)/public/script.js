@@ -1,18 +1,18 @@
 Chart.defaults.backgroundColor = 'rgb(128, 138, 135)';
 stored = [[0], [0], [0], [0], [0], [0]]
 function shortPolling() {
-var ws = new WebSocket('ws://localhost:8080');
+var ws = new WebSocket('ws://localhost:5000');
    ws.addEventListener('message', function(e) {
     var data = JSON.parse(e.data);
-    value = Number(data[0])
+    value = Number(data.p1)
     stored[0].push(value)
-    value1 = Number(data[1])
+    value = Number(data.p2)
     stored[1].push(value)
-    value2 = Number(data[2])
+    value = Number(data.p3)
     stored[2].push(value)
-    value3 = Number(data[3])
+    value = Number(data.p4)
     stored[3].push(value)
-    value4 = Number(data[4])
+    value = Number(data.p5)
     stored[4].push(value)
    })
 
