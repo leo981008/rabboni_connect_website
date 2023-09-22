@@ -11,3 +11,6 @@ create table pointdb(
    time INT(100) NOT NULL,  
    PRIMARY KEY ( id )  
 );
+  
+  
+flask run 
