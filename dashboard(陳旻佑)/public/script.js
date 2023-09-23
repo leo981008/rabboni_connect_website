@@ -111,6 +111,8 @@ const chart2 = document.getElementById('chart2')
     }
   });
 
+  
+
 function shortPolling() {
 var ws = new WebSocket('ws:127.0.0.1:5000');
    ws.addEventListener('message', function(e) {
@@ -132,4 +134,4 @@ var ws = new WebSocket('ws:127.0.0.1:5000');
     chart5.update();
    })
 }
-setInterval(shortPolling, 1000);
+setInterval(shortPolling, 2000);
