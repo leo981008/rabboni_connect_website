@@ -1,20 +1,12 @@
-const chart1 = document.getElementById('pie');
-      new Chart(chart1, {
-        type: 'line',
+const ctx = document.getElementById('pie');
+     const chart =  new Chart(ctx, {
+        type: 'doughnut',
         data: {
           labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
           datasets: [{
             label: '數據1',
-            data: [],
+            data: [1, 2, 3, 4, 5, 6],
             borderWidth: 3,
-            borderColor: 'rgb(128, 138, 135)',
           }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: false
-            }
-          }
         }
       });

@@ -1,5 +1,5 @@
 Chart.defaults.backgroundColor = 'rgb(128, 138, 135)';
-stored = [[0], [0], [0], [0], [0], [0]];
+var stored = [[0], [0], [0], [0], [0], [0]];
 
 
 
@@ -7,7 +7,7 @@ const ctx1 = document.getElementById('chart1');
       const chart1 = new Chart(ctx1, {
         type: 'line',
         data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          labels: stored[6],
           datasets: [{
             label: '數據1',
             data: stored[0],
@@ -23,15 +23,13 @@ const ctx1 = document.getElementById('chart1');
           }
         }
       });
-      stored = [[5]];
-    chart1.update();
 
 const ctx2 = document.getElementById('chart2') 
 
       const chart2 = new Chart(ctx2, {
       type: 'line',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: stored[6],
         datasets: [{
           label: '數據2',
           data: stored[1],
@@ -53,7 +51,7 @@ const ctx2 = document.getElementById('chart2')
     const chart3 = new Chart(ctx3, {
     type: 'line',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: stored[6],
       datasets: [{
         label: '數據3',
         data: stored[2],
@@ -75,7 +73,7 @@ const ctx2 = document.getElementById('chart2')
     const chart4 = new Chart(ctx4, {
     type: 'line',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: stored[6],
       datasets: [{
         label: '數據4',
         data: stored[3],
@@ -97,7 +95,7 @@ const ctx2 = document.getElementById('chart2')
     const chart5 = new Chart(ctx5, {
     type: 'line',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: stored[6],
       datasets: [{
         label: '數據5',
         data: stored[4],
@@ -117,24 +115,25 @@ const ctx2 = document.getElementById('chart2')
   
 
 function shortPolling() {
-var ws = new WebSocket('ws:127.0.0.1:5000');
+var ws = new WebSocket('ws:127.0.0.1:80 ');
    ws.addEventListener('message', function(e) {
     var data = JSON.parse(e.data);
     value = Number(data.p1);
-    stored[0].push(value);
-    chart1.update();
+    chart1.data.datasets[0].data.push(value);
     value = Number(data.p2);
-    stored[1].push(value);
-    chart2.update();
+    chart2.data.datasets[0].data.push(value);
     value = Number(data.p3);
-    stored[2].push(value);
-    chart3.update();
+    chart3.data.datasets[0].data.push(value);
     value = Number(data.p4);
-    stored[3].push(wvalue);
-    chart4.update();
+    chart4.data.datasets[0].data.push(value);
     value = Number(data.p5);
-    stored[4].push(value);
-    chart5.update();
+    chart5.data.datasets[0].data.push(value);
+    value = toString(data.time);    
+    chart1.data.labels.push(value);
+    chart2.data.labels.push(value);
+    chart3.data.labels.push(value);
+    chart4.data.labels.push(value);
+    chart5.data.labels.push(value);
    })
-}
+};
 setInterval(shortPolling, 2000);
