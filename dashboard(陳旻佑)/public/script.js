@@ -1,8 +1,10 @@
 Chart.defaults.backgroundColor = 'rgb(128, 138, 135)';
-stored = [[0], [0], [0], [0], [0], [0]]
+stored = [[0], [0], [0], [0], [0], [0]];
 
-const chart1 = document.getElementById('chart1');
-      new Chart(chart1, {
+
+
+const ctx1 = document.getElementById('chart1');
+      const chart1 = new Chart(ctx1, {
         type: 'line',
         data: {
           labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -21,11 +23,12 @@ const chart1 = document.getElementById('chart1');
           }
         }
       });
-    
+      stored = [[5]];
+    chart1.update();
 
-const chart2 = document.getElementById('chart2')
+const ctx2 = document.getElementById('chart2') 
 
-      new Chart(chart2, {
+      const chart2 = new Chart(ctx2, {
       type: 'line',
       data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -45,9 +48,9 @@ const chart2 = document.getElementById('chart2')
       }
     });
 
-    const chart3 = document.getElementById('chart3')
+    const ctx3 = document.getElementById('chart3')
 
-    new Chart(chart3, {
+    const chart3 = new Chart(ctx3, {
     type: 'line',
     data: {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -67,9 +70,9 @@ const chart2 = document.getElementById('chart2')
     }
   });
 
-  const chart4 = document.getElementById('chart4')
+  const ctx4 = document.getElementById('chart4')
 
-    new Chart(chart4, {
+    const chart4 = new Chart(ctx4, {
     type: 'line',
     data: {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -89,9 +92,9 @@ const chart2 = document.getElementById('chart2')
     }
   });
 
-  const chart5 = document.getElementById('chart5')
+  const ctx5 = document.getElementById('chart5')
 
-    new Chart(chart5, {
+    const chart5 = new Chart(ctx5, {
     type: 'line',
     data: {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -127,7 +130,7 @@ var ws = new WebSocket('ws:127.0.0.1:5000');
     stored[2].push(value);
     chart3.update();
     value = Number(data.p4);
-    stored[3].push(value);
+    stored[3].push(wvalue);
     chart4.update();
     value = Number(data.p5);
     stored[4].push(value);
