@@ -3,14 +3,15 @@ var stored = [[0], [0], [0], [0], [0], [0]];
 
 
 
-const ctx1 = document.getElementById('chart1');
+function draw_line_chart(data, element_id, label) {
+      const ctx1 = document.getElementById(element_id);
       const chart1 = new Chart(ctx1, {
         type: 'line',
         data: {
-          labels: stored[6],
+          labels: stored[5],
           datasets: [{
-            label: '數據1',
-            data: stored[0],
+            label: label,
+            data: data,
             borderWidth: 3,
             borderColor: 'rgb(128, 138, 135)',
           }]
@@ -24,93 +25,102 @@ const ctx1 = document.getElementById('chart1');
         }
       });
 
-const ctx2 = document.getElementById('chart2') 
+      return ctx1, chart1
+}
 
-      const chart2 = new Chart(ctx2, {
-      type: 'line',
-      data: {
-        labels: stored[6],
-        datasets: [{
-          label: '數據2',
-          data: stored[1],
-          borderWidth: 3,
-          borderColor: 'rgb(128, 138, 135)',
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: false
-          }
-        }
-      }
-    });
+draw_line_chart(stored[0], 'chart1', '數據1')
+draw_line_chart(stored[1], 'chart2', '數據2')
+draw_line_chart(stored[2], 'chart3', '數據3')
+draw_line_chart(stored[3], 'chart4', '數據4')
+draw_line_chart(stored[4], 'chart5', '數據5')
 
-    const ctx3 = document.getElementById('chart3')
+// const ctx2 = document.getElementById('chart2') 
 
-    const chart3 = new Chart(ctx3, {
-    type: 'line',
-    data: {
-      labels: stored[6],
-      datasets: [{
-        label: '數據3',
-        data: stored[2],
-        borderWidth: 3,
-        borderColor: 'rgb(128, 138, 135)',
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: false
-        }
-      }
-    }
-  });
+//       const chart2 = new Chart(ctx2, {
+//       type: 'line',
+//       data: {
+//         labels: stored[6],
+//         datasets: [{
+//           label: '數據2',
+//           data: stored[1],
+//           borderWidth: 3,
+//           borderColor: 'rgb(128, 138, 135)',
+//         }]
+//       },
+//       options: {
+//         scales: {
+//           y: {
+//             beginAtZero: false
+//           }
+//         }
+//       }
+//     });
 
-  const ctx4 = document.getElementById('chart4')
+//     const ctx3 = document.getElementById('chart3')
 
-    const chart4 = new Chart(ctx4, {
-    type: 'line',
-    data: {
-      labels: stored[6],
-      datasets: [{
-        label: '數據4',
-        data: stored[3],
-        borderWidth: 3,
-        borderColor: 'rgb(128, 138, 135)',
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: false
-        }
-      }
-    }
-  });
+//     const chart3 = new Chart(ctx3, {
+//     type: 'line',
+//     data: {
+//       labels: stored[6],
+//       datasets: [{
+//         label: '數據3',
+//         data: stored[2],
+//         borderWidth: 3,
+//         borderColor: 'rgb(128, 138, 135)',
+//       }]
+//     },
+//     options: {
+//       scales: {
+//         y: {
+//           beginAtZero: false
+//         }
+//       }
+//     }
+//   });
 
-  const ctx5 = document.getElementById('chart5')
+//   const ctx4 = document.getElementById('chart4')
 
-    const chart5 = new Chart(ctx5, {
-    type: 'line',
-    data: {
-      labels: stored[6],
-      datasets: [{
-        label: '數據5',
-        data: stored[4],
-        borderWidth: 3,
-        borderColor: 'rgb(128, 138, 135)',
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: false
-        }
-      }
-    }
-  });
+//     const chart4 = new Chart(ctx4, {
+//     type: 'line',
+//     data: {
+//       labels: stored[6],
+//       datasets: [{
+//         label: '數據4',
+//         data: stored[3],
+//         borderWidth: 3,
+//         borderColor: 'rgb(128, 138, 135)',
+//       }]
+//     },
+//     options: {
+//       scales: {
+//         y: {
+//           beginAtZero: false
+//         }
+//       }
+//     }
+//   });
+
+//   const ctx5 = document.getElementById('chart5')
+
+//     const chart5 = new Chart(ctx5, {
+//     type: 'line',
+//     data: {
+//       labels: stored[6],
+//       datasets: [{
+//         label: '數據5',
+//         data: stored[4],
+//         borderWidth: 3,
+//         borderColor: 'rgb(128, 138, 135)',
+//       }]
+//     },
+//     options: {
+//       scales: {
+//         y: {
+//           beginAtZero: false
+//         }
+//       }
+//     }
+//   });
 
   
 
