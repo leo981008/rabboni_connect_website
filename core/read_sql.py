@@ -15,5 +15,5 @@ cursor = connection.cursor()
 query1 = "SELECT * FROM pointdb;"
 cursor.execute(query1)
 data = cursor.fetchall()
-data1 = data[0]
+data1 = data[-1]
 connection.commit()
