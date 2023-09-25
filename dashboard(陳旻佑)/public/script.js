@@ -118,17 +118,17 @@ function shortPolling() {
 var ws = new WebSocket('ws:127.0.0.1:80 ');
    ws.addEventListener('message', function(e) {
     var data = JSON.parse(e.data);
-    value = Number(data.p1);
+    value1 = Number(data.p1);
     chart1.data.datasets[0].data.push(value);
-    value = Number(data.p2);
+    value2 = Number(data.p2);
     chart2.data.datasets[0].data.push(value);
-    value = Number(data.p3);
+    value3 = Number(data.p3);
     chart3.data.datasets[0].data.push(value);
-    value = Number(data.p4);
+    value4 = Number(data.p4);
     chart4.data.datasets[0].data.push(value);
-    value = Number(data.p5);
+    value5 = Number(data.p5);
     chart5.data.datasets[0].data.push(value);
-    value = toString(data.time);    
+    value6 = toString(data.time);    
     chart1.data.labels.push(value);
     chart2.data.labels.push(value);
     chart3.data.labels.push(value);
