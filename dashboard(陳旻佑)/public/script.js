@@ -1,132 +1,41 @@
-Chart.defaults.backgroundColor = 'rgb(128, 138, 135)';
+Chart.defaults.backgroundColor = "rgb(128, 138, 135)";
 var stored = [[0], [0], [0], [0], [0], [0]];
 
-
-
-function draw_line_chart(data, element_id, label) {
-      const ctx1 = document.getElementById(element_id);
-      const chart1 = new Chart(ctx1, {
-        type: 'line',
+function draw_line_chart(data, element_id, label="數據", color="rgb(128, 138, 135)") {
+      const ctx = document.getElementById(element_id);
+      const chart = new Chart(ctx, {
+        type: "line",
         data: {
           labels: stored[5],
           datasets: [{
             label: label,
             data: data,
             borderWidth: 3,
-            borderColor: 'rgb(128, 138, 135)',
+            borderColor: color,
           }]
         },
         options: {
+          maintainAspectRatio: false,
           scales: {
             y: {
-              beginAtZero: false
+              beginAtZero: false, 
             }
           }
         }
       });
 
-      return ctx1, chart1
+      return chart
 }
 
-draw_line_chart(stored[0], 'chart1', '數據1')
-draw_line_chart(stored[1], 'chart2', '數據2')
-draw_line_chart(stored[2], 'chart3', '數據3')
-draw_line_chart(stored[3], 'chart4', '數據4')
-draw_line_chart(stored[4], 'chart5', '數據5')
+charts = []
 
-// const ctx2 = document.getElementById('chart2') 
-
-//       const chart2 = new Chart(ctx2, {
-//       type: 'line',
-//       data: {
-//         labels: stored[6],
-//         datasets: [{
-//           label: '數據2',
-//           data: stored[1],
-//           borderWidth: 3,
-//           borderColor: 'rgb(128, 138, 135)',
-//         }]
-//       },
-//       options: {
-//         scales: {
-//           y: {
-//             beginAtZero: false
-//           }
-//         }
-//       }
-//     });
-
-//     const ctx3 = document.getElementById('chart3')
-
-//     const chart3 = new Chart(ctx3, {
-//     type: 'line',
-//     data: {
-//       labels: stored[6],
-//       datasets: [{
-//         label: '數據3',
-//         data: stored[2],
-//         borderWidth: 3,
-//         borderColor: 'rgb(128, 138, 135)',
-//       }]
-//     },
-//     options: {
-//       scales: {
-//         y: {
-//           beginAtZero: false
-//         }
-//       }
-//     }
-//   });
-
-//   const ctx4 = document.getElementById('chart4')
-
-//     const chart4 = new Chart(ctx4, {
-//     type: 'line',
-//     data: {
-//       labels: stored[6],
-//       datasets: [{
-//         label: '數據4',
-//         data: stored[3],
-//         borderWidth: 3,
-//         borderColor: 'rgb(128, 138, 135)',
-//       }]
-//     },
-//     options: {
-//       scales: {
-//         y: {
-//           beginAtZero: false
-//         }
-//       }
-//     }
-//   });
-
-//   const ctx5 = document.getElementById('chart5')
-
-//     const chart5 = new Chart(ctx5, {
-//     type: 'line',
-//     data: {
-//       labels: stored[6],
-//       datasets: [{
-//         label: '數據5',
-//         data: stored[4],
-//         borderWidth: 3,
-//         borderColor: 'rgb(128, 138, 135)',
-//       }]
-//     },
-//     options: {
-//       scales: {
-//         y: {
-//           beginAtZero: false
-//         }
-//       }
-//     }
-//   });
-
-  
+for (i = 0; i < stored.length - 1; i++) {
+  charts.push(draw_line_chart(stored[i], `chart${i+1}`, `數據${i+1}`));
+}
 
 function shortPolling() {
-var ws = new WebSocket('ws:127.0.0.1:80 ');
-   ws.addEventListener('message', function(e) {
+var ws = new WebSocket("ws:127.0.0.1:80 ");
+   ws.addEventListener("message", function(e) {
     var data = JSON.parse(e.data);
     value1 = Number(data.p1);
     chart1.data.datasets[0].data.push(value);
@@ -146,4 +55,5 @@ var ws = new WebSocket('ws:127.0.0.1:80 ');
     chart5.data.labels.push(value);
    })
 };
+
 setInterval(shortPolling, 2000);
