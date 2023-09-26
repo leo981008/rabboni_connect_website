@@ -4,9 +4,10 @@ import binascii
 import struct
 from bluepy import btle
 import time
-from ahrs.filters import Mahony
 import numpy as np
-from scipy.spatial.transform import Rotation
+
+import pymysql.cursors
+
 
 
 # ========VARIABLES========
@@ -38,8 +39,14 @@ class MyDelegate(DefaultDelegate):
     def __init__(self):
         DefaultDelegate.__init__(self)
         self.last_frame_time = time.time()
-        self.orientation = Mahony(frequency=10)
-        self.Q = np.array([1., 0., 0., 0.])
+        
+        self.connection = pymysql.connect(host='127.0.0.1',
+                             user='situser',
+                             password='sit',
+                             database='sitdb',
+                             cursorclass=pymysql.cursors.DictCursor)
+
+        self.cursor = self.connection.cursor()
 
     def handleNotification(self, cHandle, data):
         delta_time = time.time() - self.last_frame_time
@@ -54,6 +61,11 @@ class MyDelegate(DefaultDelegate):
         acc = np.array([com(t1), com(t2), com(t3)]) - ACC_OFFSET
         gyro = np.array([com(t4), com(t5), com(t6)]) * 500 - GYRO_OFFSET
         
+        acc = (acc * 100).astype(np.int64)
+        query = f"insert pointdb value(0,{acc[0]},{acc[1]},{acc[2]},4,5,{int(time.time())})"
+        self.cursor.execute(query)
+        self.connection.commit()
+
         print(acc)
         
         self.last_frame_time = time.time()
@@ -69,6 +81,8 @@ for dev in devices:
     print ("Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi))
     for (adtype, desc, value) in dev.getScanData():
         print ("  %s = %s" % (desc, value))'''
+
+
 
 per = Peripheral()
 
