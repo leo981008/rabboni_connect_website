@@ -1,4 +1,7 @@
 import pymysql.cursors
+from flask import Flask
+from flask_cors import cross_origin
+
 
 # Connect to the database
 connection = pymysql.connect(host='127.0.0.1',
@@ -7,9 +10,9 @@ connection = pymysql.connect(host='127.0.0.1',
                              database='sitdb',
                              cursorclass=pymysql.cursors.DictCursor)
 
-from flask import Flask
 app = Flask(__name__)
 @app.route("/")
+@cross_origin()
 def hello():
     cursor = connection.cursor()
     query1 = "SELECT * FROM pointdb;"
