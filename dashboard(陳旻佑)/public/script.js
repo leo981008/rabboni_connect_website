@@ -1,5 +1,7 @@
 Chart.defaults.backgroundColor = "rgb(128, 138, 135)";
 var stored = [[0], [0], [0], [0], [0], [0]];
+const httpRequest = new XMLHttpRequest();
+
 
 function draw_line_chart(data, element_id, label="數據", color="rgb(128, 138, 135)") {
       const ctx = document.getElementById(element_id);
@@ -33,10 +35,16 @@ for (i = 0; i < stored.length - 1; i++) {
   charts.push(draw_line_chart(stored[i], `chart${i+1}`, `數據${i+1}`));
 }
 
+httpRequest.open("GET", "http://10.240.40.209:5000/", true)
+httpRequest.setRequestHeader('Access-Control-Allow-Headers', '*');
+httpRequest.setRequestHeader('Content-type', 'application/ecmascript');
+httpRequest.setRequestHeader('Access-Control-Allow-Origin', '*');
+httpRequest.send()
+console.log(httpRequest.responseText)
+
 function shortPolling() {
-var ws = new WebSocket("ws:127.0.0.1:80 ");
-   ws.addEventListener("message", function(e) {
-    var data = JSON.parse(e.data);
+    
+    var data = JSON.parse(httpRequest.open("GET", "http://10.240.40.209:5000/", true));
     value1 = Number(data.p1);
     chart1.data.datasets[0].data.push(value);
     value2 = Number(data.p2);
@@ -53,7 +61,27 @@ var ws = new WebSocket("ws:127.0.0.1:80 ");
     chart3.data.labels.push(value);
     chart4.data.labels.push(value);
     chart5.data.labels.push(value);
-   })
-};
+
+  //   var ws = new WebSocket("ws:10.240.40.209:5000");
+  //  ws.addEventListener("message", function(e) {
+  //   var data = JSON.parse(e.data);
+  //   value1 = Number(data.p1);
+  //   chart1.data.datasets[0].data.push(value);
+  //   value2 = Number(data.p2);
+  //   chart2.data.datasets[0].data.push(value);
+  //   value3 = Number(data.p3);
+  //   chart3.data.datasets[0].data.push(value);
+  //   value4 = Number(data.p4);
+  //   chart4.data.datasets[0].data.push(value);
+  //   value5 = Number(data.p5);
+  //   chart5.data.datasets[0].data.push(value);
+  //   value6 = toString(data.time);    
+  //   chart1.data.labels.push(value);
+  //   chart2.data.labels.push(value);
+  //   chart3.data.labels.push(value);
+  //   chart4.data.labels.push(value);
+  //   chart5.data.labels.push(value);
+   }
+;
 
 setInterval(shortPolling, 2000);
