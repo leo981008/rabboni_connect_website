@@ -37,32 +37,30 @@ for (i = 0; i < stored.length - 1; i++) {
 
 
 function shortPolling() {
-    httpRequest.open("GET", "http://10.240.40.209:5000", true)
+    httpRequest.open("GET", "http://192.168.68.106:5000", false)
     httpRequest.setRequestHeader('Access-Control-Allow-Headers', '*');
     httpRequest.setRequestHeader('Content-type', 'application/ecmascript');
     httpRequest.setRequestHeader('Access-Control-Allow-Origin', '*');
     httpRequest.send();
-    httpRequest.onreadystatechange = () => {
-      console.log(httpRequest.responseText);
-      var data = JSON.parse(httpRequest.responseText);
+    var data = JSON.parse(httpRequest.responseText);
 
-      value1 = Number(data.p1);
-      charts[0].data.datasets[0].data.push(value1);
-      value2 = Number(data.p2);
-      charts[1].data.datasets[0].data.push(value2);
-      value3 = Number(data.p3);
-      charts[2].data.datasets[0].data.push(value3);
-      value4 = Number(data.p4);
-      charts[3].data.datasets[0].data.push(value4);
-      value5 = Number(data.p5);
-      charts[4].data.datasets[0].data.push(value5);
-      value6 = toString(new Date(data.time*1000));    
-      charts[0].data.labels.push(value6);
-      charts[1].data.labels.push(value6);
-      charts[2].data.labels.push(value6);
-      charts[3].data.labels.push(value6);
-      charts[4].data.labels.push(value6);
-    };
+    value1 = Number(data.p1);
+    charts[0].data.datasets[0].data.push(value1);
+    value2 = Number(data.p2);
+    charts[1].data.datasets[0].data.push(value2);
+    value3 = Number(data.p3);
+    charts[2].data.datasets[0].data.push(value3);
+    value4 = Number(data.p4);
+    charts[3].data.datasets[0].data.push(value4);
+    value5 = Number(data.p5);
+    charts[4].data.datasets[0].data.push(value5);
+    date = new Date(data.time)
+    value6 = date.toUTCString()
+    charts[0].data.labels.push(value6);
+
+    charts.forEach(element => {
+      element.update()
+    });
    }
 ;
 
