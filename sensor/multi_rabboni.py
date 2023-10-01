@@ -6,6 +6,7 @@ from bluepy import btle
 import time
 from threading import Thread
 import numpy as np
+import sys
 
 def com(temp):
     dec = int(temp,16)
@@ -45,9 +46,15 @@ class MultiRabboniHandler:
             t.start()
             
         while True:
-            if (self.gyro_submitted == True).all():
-                on_data_submitted(self.gyro_data)
-                self.gyro_submitted.fill(0)
+            try:
+                if (self.gyro_submitted == True).all():
+                    on_data_submitted(self.gyro_data)
+                    self.gyro_submitted.fill(0)
+                    
+            except KeyboardInterrupt:
+                print("Stopping...")
+                sys.exit()
+                
                     
     def try_connect(self, mac, device_index):
         per = Peripheral()
@@ -69,9 +76,6 @@ class MultiRabboniHandler:
             except btle.BTLEDisconnectError:
                 print(f'{mac} Failed, Retrying...')
                 
-
-
-
 
 def handle_gyro_data(data):
     print(data)
