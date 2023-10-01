@@ -1,5 +1,3 @@
-import ip from "./ip.json"
-
 Chart.defaults.backgroundColor = "rgb(128, 138, 135)";
 var stored = [[0], [0], [0], [0], [0], [0]];
 const httpRequest = new XMLHttpRequest();
@@ -39,7 +37,7 @@ for (i = 0; i < stored.length - 1; i++) {
 
 
 function shortPolling() {
-    httpRequest.open("GET",  `http://${ip.ip}:5000`, false)
+    httpRequest.open("GET",  `http://192.168.68.102:5000`, false)
     httpRequest.setRequestHeader('Access-Control-Allow-Headers', '*');
     httpRequest.setRequestHeader('Content-type', 'application/ecmascript');
     httpRequest.setRequestHeader('Access-Control-Allow-Origin', '*');
