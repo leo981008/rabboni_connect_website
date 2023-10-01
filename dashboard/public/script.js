@@ -55,8 +55,8 @@ function shortPolling() {
     value5 = Number(data.p5);
     charts[4].data.datasets[0].data.push(value5);
     date = new Date(data.time*1000)
-    value6 = date.toUTCString()
-    charts[0].data.labels.push(value6.subsrt(21, 8));
+    value6 = date.toString()
+    charts[0].data.labels.push(value6.substring(4, 10) + value6.substring(15, 21));
 
     charts.forEach(element => {
       element.update()
