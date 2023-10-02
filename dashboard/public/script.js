@@ -1,12 +1,12 @@
 Chart.defaults.backgroundColor = "rgb(128, 138, 135)";
+var stored = [[0], [0], [0], [0], [0], [0]];
 const httpRequest = new XMLHttpRequest();
-
 function draw_line_chart(data, element_id, label="數據", color="rgb(128, 138, 135)") {
       const ctx = document.getElementById(element_id);
       const chart = new Chart(ctx, {
         type: "line",
         data: {
-          labels: [[0]],
+          labels: stored[5],
           datasets: [{
             label: label,
             data: data,
@@ -23,26 +23,19 @@ function draw_line_chart(data, element_id, label="數據", color="rgb(128, 138, 
           }
         }
       });
-
       return chart
 }
-
 charts = []
-
 for (i = 0; i < stored.length - 1; i++) {
   charts.push(draw_line_chart(stored[i], `chart${i+1}`, `數據${i+1}`));
 }
-
-
-
 function shortPolling() {
-    httpRequest.open("GET",  `http://192.168.68.102:5000`, false)
+    httpRequest.open("GET",  `http://10.240.40.209:5000`, false)
     httpRequest.setRequestHeader('Access-Control-Allow-Headers', '*');
     httpRequest.setRequestHeader('Content-type', 'application/ecmascript');
     httpRequest.setRequestHeader('Access-Control-Allow-Origin', '*');
     httpRequest.send();
     var data = JSON.parse(httpRequest.responseText);
-
     value1 = Number(data.p1);
     charts[0].data.datasets[0].data.push(value1);
     value2 = Number(data.p2);
@@ -54,6 +47,8 @@ function shortPolling() {
     value5 = Number(data.p5);
     charts[4].data.datasets[0].data.push(value5);
     date = new Date(data.time*1000)
+    value6 = date.toUTCString()
+    charts[0].data.labels.push(value6.subsrt(21, 8));
     value6 = date.toString()
     charts[0].data.labels.push(value6.substring(4, 10) + value6.substring(15, 21));
 
@@ -62,5 +57,4 @@ function shortPolling() {
     });
    }
 ;
-
 setInterval(shortPolling, 2000);
