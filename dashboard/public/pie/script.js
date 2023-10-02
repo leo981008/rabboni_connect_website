@@ -11,9 +11,12 @@ const ctx = document.getElementById('pie');
         data: {
           labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
           datasets: [{
-            label: '數據1',
+            label: '資料統整',
             data: [1, 2, 3, 4, 5, 6],
             borderWidth: 3,
           }]
         }
       });
+
+chart.data.dataset[0].data = data.data;
+chart.data.dataset[0].lable = data.lable;
