@@ -1,3 +1,10 @@
+httpRequest.open("GET",  `http://192.168.68.102:5000/chart/`, false)
+httpRequest.setRequestHeader('Access-Control-Allow-Headers', '*');
+httpRequest.setRequestHeader('Content-type', 'application/ecmascript');
+httpRequest.setRequestHeader('Access-Control-Allow-Origin', '*');
+httpRequest.send();
+var data = JSON.parse(httpRequest.responseText);
+
 const ctx = document.getElementById('pie');
      const chart =  new Chart(ctx, {
         type: 'doughnut',
