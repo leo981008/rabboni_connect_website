@@ -1,5 +1,4 @@
 Chart.defaults.backgroundColor = "rgb(128, 138, 135)";
-var stored = [[0], [0], [0], [0], [0], [0]];
 const httpRequest = new XMLHttpRequest();
 
 function draw_line_chart(data, element_id, label="數據", color="rgb(128, 138, 135)") {
@@ -7,7 +6,7 @@ function draw_line_chart(data, element_id, label="數據", color="rgb(128, 138, 
       const chart = new Chart(ctx, {
         type: "line",
         data: {
-          labels: stored[5],
+          labels: [[0]],
           datasets: [{
             label: label,
             data: data,
