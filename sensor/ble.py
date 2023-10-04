@@ -9,6 +9,8 @@ MAC_ADDRS = [
     'DC:C6:A4:98:2A:E1', 
 ]
 
+UPDATE_PERIOD = 1
+
 with open('gyro_avg_offset.json', 'r') as openfile:
     json_object = json.load(openfile)
 
@@ -30,14 +32,19 @@ connection = pymysql.connect(host='127.0.0.1',
 
 cursor = connection.cursor()
 
-def handle_gyro_data(data):
-    global connection, cursor
-    
-    data = ((data - avg_offset) * 100).astype(np.int64)
-    query = f"insert pointdb value(0,{data[0][1]},{data[1][1]},0,0,0,{int(time.time())})"
-    cursor.execute(query)
-    connection.commit()
+last_time_add_data = time.time()
 
-    print(data)
+def handle_gyro_data(data):
+    global connection, cursor, last_time_add_data
+    
+    if time.time() - last_time_add_data > UPDATE_PERIOD:
+        data = ((data - avg_offset) * 100).astype(np.int64)
+        query = f"insert pointdb value(0,{data[0][1]},{data[1][1]},0,0,0,{int(time.time())})"
+        cursor.execute(query)
+        connection.commit()
+        
+        last_time_add_data = time.time()
+    
+        print(data)
             
 multi_rabboni.MultiRabboniHandler(MAC_ADDRS, on_data_submitted=handle_gyro_data)
