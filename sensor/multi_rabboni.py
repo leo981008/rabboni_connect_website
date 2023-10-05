@@ -58,14 +58,15 @@ class MultiRabboniHandler:
                     
     def try_connect(self, mac, device_index):
         per = Peripheral()
-        for i in range(100):
+        while True:
             try:
                 per.connect(mac, "random")
+                print(f'{mac} Connected!')
                 per.setDelegate(MyDelegate(self, device_index))
                 setup_data = b"\x01\x00"
                 per.writeCharacteristic(23, setup_data, withResponse=True)
                 
-                print(f'{mac} Connected!')
+                
                 
                 while True:
                     if per.waitForNotifications(5.0):                           

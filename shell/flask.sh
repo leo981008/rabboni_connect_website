@@ -1,2 +1,2 @@
 cd /home/pi/sitting_position/core
-flask run --host 0.0.0.0
+/usr/bin/flask run --host 0.0.0.0
