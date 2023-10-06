@@ -28,6 +28,10 @@ function draw_line_chart(data, element_id, label="數據", color="rgb(128, 138, 
       return chart
 }
 
+
+
+
+
 charts = []
 
 for (i = 0; i < stored.length - 1; i++) {
