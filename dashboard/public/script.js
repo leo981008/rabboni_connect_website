@@ -37,7 +37,7 @@ for (i = 0; i < stored.length - 1; i++) {
 
 
 function shortPolling() {
-    httpRequest.open("GET",  `http://192.168.68.102:5000`, false)
+    httpRequest.open("GET",  `http://10.240.40.209:5000`, false)
     httpRequest.setRequestHeader('Access-Control-Allow-Headers', '*');
     httpRequest.setRequestHeader('Content-type', 'application/ecmascript');
     httpRequest.setRequestHeader('Access-Control-Allow-Origin', '*');

@@ -7,6 +7,10 @@ import time
 from threading import Thread
 import numpy as np
 import sys
+from colorama import Fore
+import colorama
+
+colorama.init(autoreset=True)
 
 def com(temp):
     dec = int(temp,16)
@@ -21,6 +25,7 @@ class MyDelegate(DefaultDelegate):
         
         self.device_handler = device_handler
         self.device_index = device_index
+        self.flag = True
 
     def handleNotification(self, cHandle, data):
         t1 = binascii.hexlify(data)[0:4]
@@ -41,9 +46,16 @@ class MultiRabboniHandler:
         self.gyro_submitted = np.zeros(len(mac_addrs), dtype=bool)
         
         for i, mac in enumerate(mac_addrs):
+            print(f'Press Right Button on {mac} to Connect (LED on Top)')
+            
+            self.flag = True
+            
             t = Thread(target=self.try_connect, args=(mac, i))
             t.daemon = True
             t.start()
+            
+            while self.flag:
+                continue
             
         while True:
             try:
@@ -61,21 +73,21 @@ class MultiRabboniHandler:
         while True:
             try:
                 per.connect(mac, "random")
-                print(f'{mac} Connected!')
+                print(Fore.GREEN + f'{mac} Connected!')
                 per.setDelegate(MyDelegate(self, device_index))
                 setup_data = b"\x01\x00"
                 per.writeCharacteristic(23, setup_data, withResponse=True)
                 
-                
-                
-                while True:
-                    if per.waitForNotifications(5.0):                           
-                        continue
-                    
+                self.flag = False
                 break
             
-            except btle.BTLEDisconnectError:
-                print(f'{mac} Failed, Retrying...')
+            except btle.BTLEDisconnectError as err:
+                #print(f'{mac} Failed, Retrying...')
+                print(err)
+                
+        while True:
+            if per.waitForNotifications(5.0):                           
+                continue
                 
 
 def handle_gyro_data(data):
