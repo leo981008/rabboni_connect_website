@@ -54,8 +54,8 @@ class MultiRabboniHandler:
             t.daemon = True
             t.start()
             
-            while self.flag:
-                continue
+#             while self.flag:
+#                 continue
             
         while True:
             try:
